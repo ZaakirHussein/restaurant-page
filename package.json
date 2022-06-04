@@ -1,0 +1,26 @@
+{
+  "name": "restaurant-page",
+  "version": "1.0.0",
+  "description": "Odin Project: Let’s use what we’ve learned and take a chance to continue practicing DOM manipulation by dynamically rendering a simple restaurant homepage! By the end, we are going to be using JavaScript alone to generate the entire contents of the website!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZaakirHussein/restaurant-page.git"
+  },
+  "author": "Zaakir Hussein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZaakirHussein/restaurant-page/issues"
+  },
+  "homepage": "https://github.com/ZaakirHussein/restaurant-page#readme",
+  "devDependencies": {
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "@googlemaps/js-api-loader": "^1.14.3"
+  }
+}
