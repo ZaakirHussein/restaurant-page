@@ -27,7 +27,7 @@ function contactPageDisplay () {
 
     const bgImgContainer =  addContent.appendChild(document.createElement('div'));
     bgImgContainer.classList.add('background-container');
-    bgImgContainer.style.backgroundImage = 'url(./styles/images/anchor-lee-kO1G3neRA2o-unsplash.jpg)'
+    bgImgContainer.style.backgroundImage = 'url(/src/styles/images/anchor-lee-kO1G3neRA2o-unsplash.jpg)'
     
     const findUsSection = (() => {
         const findUsContainer = bgImgContainer.appendChild(document.createElement("div"));
@@ -174,7 +174,7 @@ const navCreation = (append) => {
         leftNavBar.classList.add('nav-left');
             const leftNavLogo = leftNavBar.appendChild(document.createElement('img'));
                 leftNavLogo.setAttribute("id","nav-logo");
-                leftNavLogo.src="./styles/images/Cape Point Chicken House-logos_transparent.png";
+                leftNavLogo.src="/src/styles/images/Cape Point Chicken House-logos_transparent.png";
         // Center Navigation Bar
         const centerNavBar = navBar.appendChild(document.createElement('div'));
         centerNavBar.classList.add('nav-center');
@@ -185,7 +185,7 @@ const navCreation = (append) => {
 
                 for (const link of navLinks) {
                     const listViewItem = unorderedList.appendChild(document.createElement('li'));
-                    listViewItem.classList.add('tab-container');
+                    listViewItem.classList.add('nav-container');
                     const a = listViewItem.appendChild(document.createElement('a'));
                     a.appendChild(document.createTextNode(link));
                     a.setAttribute('id', link);
@@ -198,11 +198,11 @@ const navCreation = (append) => {
             const socialsContainer = rightNavBar.appendChild(document.createElement('div'));
             socialsContainer.classList.add('socials')
                 const instagramLogo = socialsContainer.appendChild(document.createElement('img'));
-                instagramLogo.src = "./styles/images/instagram.png";
+                instagramLogo.src = "/src/styles/images/instagram.png";
                 const facebookLogo = socialsContainer.appendChild(document.createElement('img'));
-                facebookLogo.src = "./styles/images/facebook.png";
+                facebookLogo.src = "/src/styles/images/facebook.png";
                 const twitterLogo = socialsContainer.appendChild(document.createElement('img'));
-                twitterLogo.src = "./styles/images/twitter.png";
+                twitterLogo.src = "/src/styles/images/twitter.png";
             
             // Tab Switching Logic. Removes content using replaceChildren() then repopulates display with corresponding click event listner. 
                 const contentContainer = document.querySelector('.content');
@@ -255,6 +255,7 @@ const homePageDisplay = (() => {
 
     // Navigation Bar Creation
     (0,_header__WEBPACK_IMPORTED_MODULE_0__["default"])(addContent);
+    
 
     // Slideshow Creation
     const slideShowCreation = (() => {
@@ -264,22 +265,22 @@ const homePageDisplay = (() => {
             slide1Container.classList.add('slides');
                 const slide1 = slide1Container.appendChild(document.createElement('img'));
                 slide1.classList.add('slide-image');
-                slide1.src = "./styles/images/albert-YYZU0Lo1uXE-unsplash.jpg";
+                slide1.src = "/src/styles/images/albert-YYZU0Lo1uXE-unsplash.jpg";
             const slide2Container = slideShowContainer.appendChild(document.createElement('div'));
             slide2Container.classList.add('slides');
                 const slide2 = slide2Container.appendChild(document.createElement('img'));
                 slide2.classList.add('slide-image');
-                slide2.src = "./styles/images/sameer-waskar-KojQfg8UdCE-unsplash.jpg";  
+                slide2.src = "/src/styles/images/sameer-waskar-KojQfg8UdCE-unsplash.jpg";  
             const slide3Container = slideShowContainer.appendChild(document.createElement('div'));
             slide3Container.classList.add('slides');
                 const slide3 = slide3Container.appendChild(document.createElement('img'));
                 slide3.classList.add('slide-image');
-                slide3.src = "./styles/images/andrew-itaga-_sBMs1TrcIE-unsplash.jpg";
+                slide3.src = "/src/styles/images/andrew-itaga-_sBMs1TrcIE-unsplash.jpg";
             const slide4Container = slideShowContainer.appendChild(document.createElement('div'));
             slide4Container.classList.add('slides');
                 const slide4 = slide4Container.appendChild(document.createElement('img'));
                 slide4.classList.add('slide-image');
-                slide4.src = "./styles/images/peter-pham-DMnYfIAfYSs-unsplash.jpg";
+                slide4.src = "/src/styles/images/peter-pham-DMnYfIAfYSs-unsplash.jpg";
                 })();
 
 
@@ -329,7 +330,7 @@ const informationCreation =() => {
         infoCenter.classList.add('center-info');
             const infoLogo = infoCenter.appendChild(document.createElement('img'));
             infoLogo.classList.add('info-logo');
-            infoLogo.src = "/styles/images/Cape Point Chicken House-logos_transparent.png";
+            infoLogo.src = "/src/styles/images/Cape Point Chicken House-logos_transparent.png";
 
         //Info Section Right
         const infoRight = informationContainer.appendChild(document.createElement('div'));
@@ -369,19 +370,20 @@ function menuPageDisplay () {
 
     // Navigation Bar Creation
     (0,_header__WEBPACK_IMPORTED_MODULE_0__["default"])(addContent);
-    (0,_tabhighlight__WEBPACK_IMPORTED_MODULE_2__.highlightTab)(1);
+    (0,_tabhighlight__WEBPACK_IMPORTED_MODULE_2__.highlightTab)(1)
 
     // Menu Image Display
     const displayMenu = (() => {
         const menuContainer = addContent.appendChild(document.createElement("div"));
         menuContainer.classList.add('menu-container')
             const menuImage = menuContainer.appendChild(document.createElement('img'));
-            menuImage.src = "./styles/images/menu.png";
+            menuImage.src = "/src/styles/images/menu.png";
             menuImage.setAttribute('id', 'menu-pic')
     })();
     
     //Information Section Creation
     (0,_info__WEBPACK_IMPORTED_MODULE_1__["default"])();
+    (0,_tabhighlight__WEBPACK_IMPORTED_MODULE_2__.highlightTab)(1);
 };
 
 
@@ -430,7 +432,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "highlightTab": () => (/* binding */ highlightTab)
 /* harmony export */ });
 function highlightTab (activetab) {
-    let navTab = document.getElementsByClassName('tab-container');
+    let navTab = document.getElementsByClassName('nav-container');
     navTab[activetab].style.textDecoration = 'underline';
     navTab[activetab].style.color = 'grey';
 }
