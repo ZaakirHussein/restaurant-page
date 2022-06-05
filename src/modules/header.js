@@ -12,7 +12,7 @@ const navCreation = (append) => {
         leftNavBar.classList.add('nav-left');
             const leftNavLogo = leftNavBar.appendChild(document.createElement('img'));
                 leftNavLogo.setAttribute("id","nav-logo");
-                leftNavLogo.src="./styles/images/Cape Point Chicken House-logos_transparent.png";
+                leftNavLogo.src="styles/images/Cape Point Chicken House-logos_transparent.png";
         // Center Navigation Bar
         const centerNavBar = navBar.appendChild(document.createElement('div'));
         centerNavBar.classList.add('nav-center');
@@ -23,7 +23,7 @@ const navCreation = (append) => {
 
                 for (const link of navLinks) {
                     const listViewItem = unorderedList.appendChild(document.createElement('li'));
-                    listViewItem.classList.add('tab-container');
+                    listViewItem.classList.add('nav-container');
                     const a = listViewItem.appendChild(document.createElement('a'));
                     a.appendChild(document.createTextNode(link));
                     a.setAttribute('id', link);
@@ -36,11 +36,11 @@ const navCreation = (append) => {
             const socialsContainer = rightNavBar.appendChild(document.createElement('div'));
             socialsContainer.classList.add('socials')
                 const instagramLogo = socialsContainer.appendChild(document.createElement('img'));
-                instagramLogo.src = "./styles/images/instagram.png";
+                instagramLogo.src = "styles/images/instagram.png";
                 const facebookLogo = socialsContainer.appendChild(document.createElement('img'));
-                facebookLogo.src = "./styles/images/facebook.png";
+                facebookLogo.src = "styles/images/facebook.png";
                 const twitterLogo = socialsContainer.appendChild(document.createElement('img'));
-                twitterLogo.src = "./styles/images/twitter.png";
+                twitterLogo.src = "styles/images/twitter.png";
             
             // Tab Switching Logic. Removes content using replaceChildren() then repopulates display with corresponding click event listner. 
                 const contentContainer = document.querySelector('.content');
