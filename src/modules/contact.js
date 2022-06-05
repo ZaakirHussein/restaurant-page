@@ -1,17 +1,17 @@
 import navCreation from "./header";
-import initMap from "./map";
-import { Loader } from "@googlemaps/js-api-loader"
-
+import { highlightTab } from "./tabhighlight"
 
 function contactPageDisplay () {
     const addContent = document.querySelector('.content'); 
     
     // Navigation Bar Creation
     navCreation(addContent);
+    highlightTab(2)
+    
 
     const bgImgContainer =  addContent.appendChild(document.createElement('div'));
     bgImgContainer.classList.add('background-container');
-    bgImgContainer.style.backgroundImage = 'url(/styles/images/anchor-lee-kO1G3neRA2o-unsplash.jpg)'
+    bgImgContainer.style.backgroundImage = 'url(./styles/images/anchor-lee-kO1G3neRA2o-unsplash.jpg)'
     
     const findUsSection = (() => {
         const findUsContainer = bgImgContainer.appendChild(document.createElement("div"));
@@ -59,18 +59,10 @@ function contactPageDisplay () {
     const mapCreation = (() => {
         const mapContainer = bgImgContainer.appendChild(document.createElement("div"));
         mapContainer.classList.add('map-container');
-        const googleMaps = mapContainer.appendChild(document.createElement("div"));
+        const googleMaps = mapContainer.appendChild(document.createElement("iframe"));
+            googleMaps.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3879.7975236034904!2d-16.66766643491839!3d13.486570707017254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec29b07e907e14d%3A0x5f84dcea838ec574!2sCape%20Point%20Beach!5e0!3m2!1sen!2sca!4v1654433092183!5m2!1sen!2sca"
             googleMaps.setAttribute('id', 'map');
-
-        const loader = new Loader({
-            apiKey: "AIzaSyANTH1sH0tH_cfw_Gop6VIJRp2eH3Oqrmo",
-            version: "weekly",
-        });
-        // Delay Loading Dynamic Map
-        loader.load().then(() => {
-            initMap(13.487780174710045, -16.666910644498213)
-        });
-
+            googleMaps.setAttribute('frameborder', 0)
     })();
 
     // Creation of Form

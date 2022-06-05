@@ -2,341 +2,6 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/@googlemaps/js-api-loader/dist/index.esm.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@googlemaps/js-api-loader/dist/index.esm.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DEFAULT_ID": () => (/* binding */ DEFAULT_ID),
-/* harmony export */   "Loader": () => (/* binding */ Loader),
-/* harmony export */   "LoaderStatus": () => (/* binding */ LoaderStatus)
-/* harmony export */ });
-// do not edit .js files directly - edit src/index.jst
-
-
-
-var fastDeepEqual = function equal(a, b) {
-  if (a === b) return true;
-
-  if (a && b && typeof a == 'object' && typeof b == 'object') {
-    if (a.constructor !== b.constructor) return false;
-
-    var length, i, keys;
-    if (Array.isArray(a)) {
-      length = a.length;
-      if (length != b.length) return false;
-      for (i = length; i-- !== 0;)
-        if (!equal(a[i], b[i])) return false;
-      return true;
-    }
-
-
-
-    if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
-    if (a.valueOf !== Object.prototype.valueOf) return a.valueOf() === b.valueOf();
-    if (a.toString !== Object.prototype.toString) return a.toString() === b.toString();
-
-    keys = Object.keys(a);
-    length = keys.length;
-    if (length !== Object.keys(b).length) return false;
-
-    for (i = length; i-- !== 0;)
-      if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
-
-    for (i = length; i-- !== 0;) {
-      var key = keys[i];
-
-      if (!equal(a[key], b[key])) return false;
-    }
-
-    return true;
-  }
-
-  // true if both NaN, false otherwise
-  return a!==a && b!==b;
-};
-
-/**
- * Copyright 2019 Google LLC. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at.
- *
- *      Http://www.apache.org/licenses/LICENSE-2.0.
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-const DEFAULT_ID = "__googleMapsScriptId";
-/**
- * The status of the [[Loader]].
- */
-var LoaderStatus;
-(function (LoaderStatus) {
-    LoaderStatus[LoaderStatus["INITIALIZED"] = 0] = "INITIALIZED";
-    LoaderStatus[LoaderStatus["LOADING"] = 1] = "LOADING";
-    LoaderStatus[LoaderStatus["SUCCESS"] = 2] = "SUCCESS";
-    LoaderStatus[LoaderStatus["FAILURE"] = 3] = "FAILURE";
-})(LoaderStatus || (LoaderStatus = {}));
-/**
- * [[Loader]] makes it easier to add Google Maps JavaScript API to your application
- * dynamically using
- * [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
- * It works by dynamically creating and appending a script node to the the
- * document head and wrapping the callback function so as to return a promise.
- *
- * ```
- * const loader = new Loader({
- *   apiKey: "",
- *   version: "weekly",
- *   libraries: ["places"]
- * });
- *
- * loader.load().then((google) => {
- *   const map = new google.maps.Map(...)
- * })
- * ```
- */
-class Loader {
-    /**
-     * Creates an instance of Loader using [[LoaderOptions]]. No defaults are set
-     * using this library, instead the defaults are set by the Google Maps
-     * JavaScript API server.
-     *
-     * ```
-     * const loader = Loader({apiKey, version: 'weekly', libraries: ['places']});
-     * ```
-     */
-    constructor({ apiKey, authReferrerPolicy, channel, client, id = DEFAULT_ID, language, libraries = [], mapIds, nonce, region, retries = 3, url = "https://maps.googleapis.com/maps/api/js", version, }) {
-        this.CALLBACK = "__googleMapsCallback";
-        this.callbacks = [];
-        this.done = false;
-        this.loading = false;
-        this.errors = [];
-        this.apiKey = apiKey;
-        this.authReferrerPolicy = authReferrerPolicy;
-        this.channel = channel;
-        this.client = client;
-        this.id = id || DEFAULT_ID; // Do not allow empty string
-        this.language = language;
-        this.libraries = libraries;
-        this.mapIds = mapIds;
-        this.nonce = nonce;
-        this.region = region;
-        this.retries = retries;
-        this.url = url;
-        this.version = version;
-        if (Loader.instance) {
-            if (!fastDeepEqual(this.options, Loader.instance.options)) {
-                throw new Error(`Loader must not be called again with different options. ${JSON.stringify(this.options)} !== ${JSON.stringify(Loader.instance.options)}`);
-            }
-            return Loader.instance;
-        }
-        Loader.instance = this;
-    }
-    get options() {
-        return {
-            version: this.version,
-            apiKey: this.apiKey,
-            channel: this.channel,
-            client: this.client,
-            id: this.id,
-            libraries: this.libraries,
-            language: this.language,
-            region: this.region,
-            mapIds: this.mapIds,
-            nonce: this.nonce,
-            url: this.url,
-            authReferrerPolicy: this.authReferrerPolicy,
-        };
-    }
-    get status() {
-        if (this.errors.length) {
-            return LoaderStatus.FAILURE;
-        }
-        if (this.done) {
-            return LoaderStatus.SUCCESS;
-        }
-        if (this.loading) {
-            return LoaderStatus.LOADING;
-        }
-        return LoaderStatus.INITIALIZED;
-    }
-    get failed() {
-        return this.done && !this.loading && this.errors.length >= this.retries + 1;
-    }
-    /**
-     * CreateUrl returns the Google Maps JavaScript API script url given the [[LoaderOptions]].
-     *
-     * @ignore
-     */
-    createUrl() {
-        let url = this.url;
-        url += `?callback=${this.CALLBACK}`;
-        if (this.apiKey) {
-            url += `&key=${this.apiKey}`;
-        }
-        if (this.channel) {
-            url += `&channel=${this.channel}`;
-        }
-        if (this.client) {
-            url += `&client=${this.client}`;
-        }
-        if (this.libraries.length > 0) {
-            url += `&libraries=${this.libraries.join(",")}`;
-        }
-        if (this.language) {
-            url += `&language=${this.language}`;
-        }
-        if (this.region) {
-            url += `&region=${this.region}`;
-        }
-        if (this.version) {
-            url += `&v=${this.version}`;
-        }
-        if (this.mapIds) {
-            url += `&map_ids=${this.mapIds.join(",")}`;
-        }
-        if (this.authReferrerPolicy) {
-            url += `&auth_referrer_policy=${this.authReferrerPolicy}`;
-        }
-        return url;
-    }
-    deleteScript() {
-        const script = document.getElementById(this.id);
-        if (script) {
-            script.remove();
-        }
-    }
-    /**
-     * Load the Google Maps JavaScript API script and return a Promise.
-     */
-    load() {
-        return this.loadPromise();
-    }
-    /**
-     * Load the Google Maps JavaScript API script and return a Promise.
-     *
-     * @ignore
-     */
-    loadPromise() {
-        return new Promise((resolve, reject) => {
-            this.loadCallback((err) => {
-                if (!err) {
-                    resolve(window.google);
-                }
-                else {
-                    reject(err.error);
-                }
-            });
-        });
-    }
-    /**
-     * Load the Google Maps JavaScript API script with a callback.
-     */
-    loadCallback(fn) {
-        this.callbacks.push(fn);
-        this.execute();
-    }
-    /**
-     * Set the script on document.
-     */
-    setScript() {
-        if (document.getElementById(this.id)) {
-            // TODO wrap onerror callback for cases where the script was loaded elsewhere
-            this.callback();
-            return;
-        }
-        const url = this.createUrl();
-        const script = document.createElement("script");
-        script.id = this.id;
-        script.type = "text/javascript";
-        script.src = url;
-        script.onerror = this.loadErrorCallback.bind(this);
-        script.defer = true;
-        script.async = true;
-        if (this.nonce) {
-            script.nonce = this.nonce;
-        }
-        document.head.appendChild(script);
-    }
-    /**
-     * Reset the loader state.
-     */
-    reset() {
-        this.deleteScript();
-        this.done = false;
-        this.loading = false;
-        this.errors = [];
-        this.onerrorEvent = null;
-    }
-    resetIfRetryingFailed() {
-        if (this.failed) {
-            this.reset();
-        }
-    }
-    loadErrorCallback(e) {
-        this.errors.push(e);
-        if (this.errors.length <= this.retries) {
-            const delay = this.errors.length * Math.pow(2, this.errors.length);
-            console.log(`Failed to load Google Maps script, retrying in ${delay} ms.`);
-            setTimeout(() => {
-                this.deleteScript();
-                this.setScript();
-            }, delay);
-        }
-        else {
-            this.onerrorEvent = e;
-            this.callback();
-        }
-    }
-    setCallback() {
-        window.__googleMapsCallback = this.callback.bind(this);
-    }
-    callback() {
-        this.done = true;
-        this.loading = false;
-        this.callbacks.forEach((cb) => {
-            cb(this.onerrorEvent);
-        });
-        this.callbacks = [];
-    }
-    execute() {
-        this.resetIfRetryingFailed();
-        if (this.done) {
-            this.callback();
-        }
-        else {
-            // short circuit and warn if google.maps is already loaded
-            if (window.google && window.google.maps && window.google.maps.version) {
-                console.warn("Google Maps already loaded outside @googlemaps/js-api-loader." +
-                    "This may result in undesirable behavior as options and script parameters may not match.");
-                this.callback();
-                return;
-            }
-            if (this.loading) ;
-            else {
-                this.loading = true;
-                this.setCallback();
-                this.setScript();
-            }
-        }
-    }
-}
-
-
-//# sourceMappingURL=index.esm.js.map
-
-
-/***/ }),
-
 /***/ "./src/modules/contact.js":
 /*!********************************!*\
   !*** ./src/modules/contact.js ***!
@@ -348,10 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "contactPageDisplay": () => (/* binding */ contactPageDisplay)
 /* harmony export */ });
 /* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./header */ "./src/modules/header.js");
-/* harmony import */ var _map__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./map */ "./src/modules/map.js");
-/* harmony import */ var _googlemaps_js_api_loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @googlemaps/js-api-loader */ "./node_modules/@googlemaps/js-api-loader/dist/index.esm.js");
-
-
+/* harmony import */ var _tabhighlight__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tabhighlight */ "./src/modules/tabhighlight.js");
 
 
 
@@ -360,10 +22,12 @@ function contactPageDisplay () {
     
     // Navigation Bar Creation
     (0,_header__WEBPACK_IMPORTED_MODULE_0__["default"])(addContent);
+    (0,_tabhighlight__WEBPACK_IMPORTED_MODULE_1__.highlightTab)(2)
+    
 
     const bgImgContainer =  addContent.appendChild(document.createElement('div'));
     bgImgContainer.classList.add('background-container');
-    bgImgContainer.style.backgroundImage = 'url(/styles/images/anchor-lee-kO1G3neRA2o-unsplash.jpg)'
+    bgImgContainer.style.backgroundImage = 'url(./styles/images/anchor-lee-kO1G3neRA2o-unsplash.jpg)'
     
     const findUsSection = (() => {
         const findUsContainer = bgImgContainer.appendChild(document.createElement("div"));
@@ -411,18 +75,10 @@ function contactPageDisplay () {
     const mapCreation = (() => {
         const mapContainer = bgImgContainer.appendChild(document.createElement("div"));
         mapContainer.classList.add('map-container');
-        const googleMaps = mapContainer.appendChild(document.createElement("div"));
+        const googleMaps = mapContainer.appendChild(document.createElement("iframe"));
+            googleMaps.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3879.7975236034904!2d-16.66766643491839!3d13.486570707017254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec29b07e907e14d%3A0x5f84dcea838ec574!2sCape%20Point%20Beach!5e0!3m2!1sen!2sca!4v1654433092183!5m2!1sen!2sca"
             googleMaps.setAttribute('id', 'map');
-
-        const loader = new _googlemaps_js_api_loader__WEBPACK_IMPORTED_MODULE_2__.Loader({
-            apiKey: "AIzaSyANTH1sH0tH_cfw_Gop6VIJRp2eH3Oqrmo",
-            version: "weekly",
-        });
-        // Delay Loading Dynamic Map
-        loader.load().then(() => {
-            (0,_map__WEBPACK_IMPORTED_MODULE_1__["default"])(13.487780174710045, -16.666910644498213)
-        });
-
+            googleMaps.setAttribute('frameborder', 0)
     })();
 
     // Creation of Form
@@ -504,26 +160,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_modules_slide_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../src/modules/slide.js */ "./src/modules/slide.js");
 /* harmony import */ var _src_modules_menu_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../src/modules/menu.js */ "./src/modules/menu.js");
 /* harmony import */ var _src_modules_contact_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../src/modules/contact.js */ "./src/modules/contact.js");
-/* harmony import */ var _tabhighlight__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tabhighlight */ "./src/modules/tabhighlight.js");
 // Home Page Display
 
 
 // Menu Page Display 
 
 
-// Active Tab Highlights
-
-
 
 const navCreation = (append) => {
-    let activeTab;
     const navBar = append.appendChild(document.createElement("nav"));
         // Left Navigation Bar
         const leftNavBar = navBar.appendChild(document.createElement('div'));
         leftNavBar.classList.add('nav-left');
             const leftNavLogo = leftNavBar.appendChild(document.createElement('img'));
                 leftNavLogo.setAttribute("id","nav-logo");
-                leftNavLogo.src="/styles/images/Cape Point Chicken House-logos_transparent.png";
+                leftNavLogo.src="./styles/images/Cape Point Chicken House-logos_transparent.png";
         // Center Navigation Bar
         const centerNavBar = navBar.appendChild(document.createElement('div'));
         centerNavBar.classList.add('nav-center');
@@ -534,6 +185,7 @@ const navCreation = (append) => {
 
                 for (const link of navLinks) {
                     const listViewItem = unorderedList.appendChild(document.createElement('li'));
+                    listViewItem.classList.add('tab-container');
                     const a = listViewItem.appendChild(document.createElement('a'));
                     a.appendChild(document.createTextNode(link));
                     a.setAttribute('id', link);
@@ -546,11 +198,11 @@ const navCreation = (append) => {
             const socialsContainer = rightNavBar.appendChild(document.createElement('div'));
             socialsContainer.classList.add('socials')
                 const instagramLogo = socialsContainer.appendChild(document.createElement('img'));
-                instagramLogo.src = "/styles/images/instagram.png";
+                instagramLogo.src = "./styles/images/instagram.png";
                 const facebookLogo = socialsContainer.appendChild(document.createElement('img'));
-                facebookLogo.src = "/styles/images/facebook.png";
+                facebookLogo.src = "./styles/images/facebook.png";
                 const twitterLogo = socialsContainer.appendChild(document.createElement('img'));
-                twitterLogo.src = "/styles/images/twitter.png";
+                twitterLogo.src = "./styles/images/twitter.png";
             
             // Tab Switching Logic. Removes content using replaceChildren() then repopulates display with corresponding click event listner. 
                 const contentContainer = document.querySelector('.content');
@@ -565,20 +217,17 @@ const navCreation = (append) => {
                 const homeHandler = homeTab.addEventListener('click', function () {
                     removeContent();
                     (0,_src_modules_home_js__WEBPACK_IMPORTED_MODULE_0__.homePageDisplay)();
-                    (0,_src_modules_slide_js__WEBPACK_IMPORTED_MODULE_1__.slideShowAnimation)();
-                    (0,_tabhighlight__WEBPACK_IMPORTED_MODULE_4__.highlightTab)(homeTab)                
+                    (0,_src_modules_slide_js__WEBPACK_IMPORTED_MODULE_1__.slideShowAnimation)();        
                 })
 
                 const menuHandler = menuTab.addEventListener('click', function() {
                     removeContent();
                     (0,_src_modules_menu_js__WEBPACK_IMPORTED_MODULE_2__.menuPageDisplay)();
-                    (0,_tabhighlight__WEBPACK_IMPORTED_MODULE_4__.highlightTab)(menuTab);
                 })
 
                 const contactHandler = contactTab.addEventListener('click', function () {
                     removeContent();
                     (0,_src_modules_contact_js__WEBPACK_IMPORTED_MODULE_3__.contactPageDisplay)();
-                    (0,_tabhighlight__WEBPACK_IMPORTED_MODULE_4__.highlightTab)(contactTab);
                 })
 };    
 
@@ -615,22 +264,22 @@ const homePageDisplay = (() => {
             slide1Container.classList.add('slides');
                 const slide1 = slide1Container.appendChild(document.createElement('img'));
                 slide1.classList.add('slide-image');
-                slide1.src = "/styles/images/albert-YYZU0Lo1uXE-unsplash.jpg";
+                slide1.src = "./styles/images/albert-YYZU0Lo1uXE-unsplash.jpg";
             const slide2Container = slideShowContainer.appendChild(document.createElement('div'));
             slide2Container.classList.add('slides');
                 const slide2 = slide2Container.appendChild(document.createElement('img'));
                 slide2.classList.add('slide-image');
-                slide2.src = "/styles/images/sameer-waskar-KojQfg8UdCE-unsplash.jpg";  
+                slide2.src = "./styles/images/sameer-waskar-KojQfg8UdCE-unsplash.jpg";  
             const slide3Container = slideShowContainer.appendChild(document.createElement('div'));
             slide3Container.classList.add('slides');
                 const slide3 = slide3Container.appendChild(document.createElement('img'));
                 slide3.classList.add('slide-image');
-                slide3.src = "/styles/images/andrew-itaga-_sBMs1TrcIE-unsplash.jpg";
+                slide3.src = "./styles/images/andrew-itaga-_sBMs1TrcIE-unsplash.jpg";
             const slide4Container = slideShowContainer.appendChild(document.createElement('div'));
             slide4Container.classList.add('slides');
                 const slide4 = slide4Container.appendChild(document.createElement('img'));
                 slide4.classList.add('slide-image');
-                slide4.src = "/styles/images/peter-pham-DMnYfIAfYSs-unsplash.jpg";
+                slide4.src = "./styles/images/peter-pham-DMnYfIAfYSs-unsplash.jpg";
                 })();
 
 
@@ -697,38 +346,6 @@ const informationCreation =() => {
 
 /***/ }),
 
-/***/ "./src/modules/map.js":
-/*!****************************!*\
-  !*** ./src/modules/map.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-// Initialize and add the map
-function initMap(lat, lng) {
-    // The location
-    const location = { lat, lng };
-
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 16,
-      center: location,
-    });
-    // The marker, positioned at location
-    const marker = new google.maps.Marker({
-      position: location,
-      map: map,
-    });
-  }
-  
-  window.initMap = initMap;
-  
-  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initMap);
-
-/***/ }),
-
 /***/ "./src/modules/menu.js":
 /*!*****************************!*\
   !*** ./src/modules/menu.js ***!
@@ -741,6 +358,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./header */ "./src/modules/header.js");
 /* harmony import */ var _info__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./info */ "./src/modules/info.js");
+/* harmony import */ var _tabhighlight__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tabhighlight */ "./src/modules/tabhighlight.js");
+
+
 
 
 
@@ -749,13 +369,14 @@ function menuPageDisplay () {
 
     // Navigation Bar Creation
     (0,_header__WEBPACK_IMPORTED_MODULE_0__["default"])(addContent);
+    (0,_tabhighlight__WEBPACK_IMPORTED_MODULE_2__.highlightTab)(1);
 
     // Menu Image Display
     const displayMenu = (() => {
         const menuContainer = addContent.appendChild(document.createElement("div"));
         menuContainer.classList.add('menu-container')
             const menuImage = menuContainer.appendChild(document.createElement('img'));
-            menuImage.src = "/styles/images/menu.png";
+            menuImage.src = "./styles/images/menu.png";
             menuImage.setAttribute('id', 'menu-pic')
     })();
     
@@ -809,9 +430,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "highlightTab": () => (/* binding */ highlightTab)
 /* harmony export */ });
 function highlightTab (activetab) {
-    activetab.style.textDecoration = 'underline';
-    activetab.style.color = 'grey';
-    console.log(activetab);
+    let navTab = document.getElementsByClassName('tab-container');
+    navTab[activetab].style.textDecoration = 'underline';
+    navTab[activetab].style.color = 'grey';
 }
 
 
@@ -883,49 +504,13 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_modules_home_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../src/modules/home.js */ "./src/modules/home.js");
 /* harmony import */ var _src_modules_slide_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../src/modules/slide.js */ "./src/modules/slide.js");
-/* harmony import */ var _src_modules_menu_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../src/modules/menu.js */ "./src/modules/menu.js");
-/* harmony import */ var _src_modules_tabhighlight_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../src/modules/tabhighlight.js */ "./src/modules/tabhighlight.js");
-/* harmony import */ var _src_modules_contact_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../src/modules/contact.js */ "./src/modules/contact.js");
 // Home Page Display
-
-
-// Menu Page Display 
-
-
 
 
 
 (0,_src_modules_home_js__WEBPACK_IMPORTED_MODULE_0__.homePageDisplay)();
 (0,_src_modules_slide_js__WEBPACK_IMPORTED_MODULE_1__.slideShowAnimation)();
 
-const contentContainer = document.querySelector('.content');
-
-const homeTab = document.querySelector('#Home');
-const menuTab = document.querySelector('#Menu');
-const contactTab = document.querySelector('#Contact');
-
-
-
-const removeContent = () => {
-    contentContainer.replaceChildren()
-}
-
-const homeHandler = homeTab.addEventListener('click', function () {
-    removeContent();
-    (0,_src_modules_home_js__WEBPACK_IMPORTED_MODULE_0__.homePageDisplay)();
-    (0,_src_modules_slide_js__WEBPACK_IMPORTED_MODULE_1__.slideShowAnimation)();
-})
-
-const menuHandler = menuTab.addEventListener('click', function() {
-    removeContent();
-    (0,_src_modules_menu_js__WEBPACK_IMPORTED_MODULE_2__.menuPageDisplay)();
-
-})
-
-const contactHandler = contactTab.addEventListener('click', function () {
-    removeContent();
-    (0,_src_modules_contact_js__WEBPACK_IMPORTED_MODULE_4__.contactPageDisplay)();
-})
 })();
 
 /******/ })()
