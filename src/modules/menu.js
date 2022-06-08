@@ -15,7 +15,7 @@ function menuPageDisplay () {
         const menuContainer = addContent.appendChild(document.createElement("div"));
         menuContainer.classList.add('menu-container')
             const menuImage = menuContainer.appendChild(document.createElement('img'));
-            menuImage.src = "/images/menu.png";
+            menuImage.src = "restaurant-page/images/menu.png";
             menuImage.setAttribute('id', 'menu-pic')
     })();
     

@@ -11,7 +11,7 @@ function contactPageDisplay () {
 
     const bgImgContainer =  addContent.appendChild(document.createElement('div'));
     bgImgContainer.classList.add('background-container');
-    bgImgContainer.style.backgroundImage = 'url(/images/anchor-lee-kO1G3neRA2o-unsplash.jpg)'
+    bgImgContainer.style.backgroundImage = 'url(restaurant-page/images/anchor-lee-kO1G3neRA2o-unsplash.jpg)'
     
     const findUsSection = (() => {
         const findUsContainer = bgImgContainer.appendChild(document.createElement("div"));

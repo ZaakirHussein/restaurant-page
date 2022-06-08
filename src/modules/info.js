@@ -26,7 +26,7 @@ const informationCreation =() => {
         infoCenter.classList.add('center-info');
             const infoLogo = infoCenter.appendChild(document.createElement('img'));
             infoLogo.classList.add('info-logo');
-            infoLogo.src = "/images/Cape Point Chicken House-logos_transparent.png";
+            infoLogo.src = "restaurant-page/images/Cape Point Chicken House-logos_transparent.png";
 
         //Info Section Right
         const infoRight = informationContainer.appendChild(document.createElement('div'));
