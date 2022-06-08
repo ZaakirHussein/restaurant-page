@@ -16,22 +16,22 @@ const homePageDisplay = (() => {
             slide1Container.classList.add('slides');
                 const slide1 = slide1Container.appendChild(document.createElement('img'));
                 slide1.classList.add('slide-image');
-                slide1.src = "/src/styles/images/albert-YYZU0Lo1uXE-unsplash.jpg";
+                slide1.src = "/dist/styles/images/albert-YYZU0Lo1uXE-unsplash.jpg";
             const slide2Container = slideShowContainer.appendChild(document.createElement('div'));
             slide2Container.classList.add('slides');
                 const slide2 = slide2Container.appendChild(document.createElement('img'));
                 slide2.classList.add('slide-image');
-                slide2.src = "/src/styles/images/sameer-waskar-KojQfg8UdCE-unsplash.jpg";  
+                slide2.src = "/dist/styles/images/sameer-waskar-KojQfg8UdCE-unsplash.jpg";  
             const slide3Container = slideShowContainer.appendChild(document.createElement('div'));
             slide3Container.classList.add('slides');
                 const slide3 = slide3Container.appendChild(document.createElement('img'));
                 slide3.classList.add('slide-image');
-                slide3.src = "/src/styles/images/andrew-itaga-_sBMs1TrcIE-unsplash.jpg";
+                slide3.src = "/dist/styles/images/andrew-itaga-_sBMs1TrcIE-unsplash.jpg";
             const slide4Container = slideShowContainer.appendChild(document.createElement('div'));
             slide4Container.classList.add('slides');
                 const slide4 = slide4Container.appendChild(document.createElement('img'));
                 slide4.classList.add('slide-image');
-                slide4.src = "/src/styles/images/peter-pham-DMnYfIAfYSs-unsplash.jpg";
+                slide4.src = "/dist/styles/images/peter-pham-DMnYfIAfYSs-unsplash.jpg";
                 })();
 
 

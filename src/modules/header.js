@@ -1,9 +1,9 @@
 // Home Page Display
-import { homePageDisplay } from '/src/modules/home.js';
-import { slideShowAnimation } from '/src/modules/slide.js';
+import { homePageDisplay } from './home';
+import { slideShowAnimation } from './slide'
 // Menu Page Display 
-import { menuPageDisplay } from '/src/modules/menu.js';
-import { contactPageDisplay } from '/src/modules/contact.js'
+import { menuPageDisplay } from './menu.js';
+import { contactPageDisplay } from './contact.js'
 
 const navCreation = (append) => {
     const navBar = append.appendChild(document.createElement("nav"));
@@ -12,7 +12,7 @@ const navCreation = (append) => {
         leftNavBar.classList.add('nav-left');
             const leftNavLogo = leftNavBar.appendChild(document.createElement('img'));
                 leftNavLogo.setAttribute("id","nav-logo");
-                leftNavLogo.src="/src/styles/images/Cape Point Chicken House-logos_transparent.png";
+                leftNavLogo.src="/dist/styles/images/Cape Point Chicken House-logos_transparent.png";
         // Center Navigation Bar
         const centerNavBar = navBar.appendChild(document.createElement('div'));
         centerNavBar.classList.add('nav-center');
@@ -36,11 +36,11 @@ const navCreation = (append) => {
             const socialsContainer = rightNavBar.appendChild(document.createElement('div'));
             socialsContainer.classList.add('socials')
                 const instagramLogo = socialsContainer.appendChild(document.createElement('img'));
-                instagramLogo.src = "/src/styles/images/instagram.png";
+                instagramLogo.src = "/dist/styles/images/instagram.png";
                 const facebookLogo = socialsContainer.appendChild(document.createElement('img'));
-                facebookLogo.src = "/src/styles/images/facebook.png";
+                facebookLogo.src = "/dist/styles/images/facebook.png";
                 const twitterLogo = socialsContainer.appendChild(document.createElement('img'));
-                twitterLogo.src = "/src/styles/images/twitter.png";
+                twitterLogo.src = "/dist/styles/images/twitter.png";
             
             // Tab Switching Logic. Removes content using replaceChildren() then repopulates display with corresponding click event listner. 
                 const contentContainer = document.querySelector('.content');
