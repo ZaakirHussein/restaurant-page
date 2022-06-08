@@ -27,7 +27,7 @@ function contactPageDisplay () {
 
     const bgImgContainer =  addContent.appendChild(document.createElement('div'));
     bgImgContainer.classList.add('background-container');
-    bgImgContainer.style.backgroundImage = 'url(/src/styles/images/anchor-lee-kO1G3neRA2o-unsplash.jpg)'
+    bgImgContainer.style.backgroundImage = 'url(/dist/styles/images/anchor-lee-kO1G3neRA2o-unsplash.jpg)'
     
     const findUsSection = (() => {
         const findUsContainer = bgImgContainer.appendChild(document.createElement("div"));
@@ -156,10 +156,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _src_modules_home_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../src/modules/home.js */ "./src/modules/home.js");
-/* harmony import */ var _src_modules_slide_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../src/modules/slide.js */ "./src/modules/slide.js");
-/* harmony import */ var _src_modules_menu_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../src/modules/menu.js */ "./src/modules/menu.js");
-/* harmony import */ var _src_modules_contact_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../src/modules/contact.js */ "./src/modules/contact.js");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home */ "./src/modules/home.js");
+/* harmony import */ var _slide__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slide */ "./src/modules/slide.js");
+/* harmony import */ var _menu_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./menu.js */ "./src/modules/menu.js");
+/* harmony import */ var _contact_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contact.js */ "./src/modules/contact.js");
 // Home Page Display
 
 
@@ -174,7 +174,7 @@ const navCreation = (append) => {
         leftNavBar.classList.add('nav-left');
             const leftNavLogo = leftNavBar.appendChild(document.createElement('img'));
                 leftNavLogo.setAttribute("id","nav-logo");
-                leftNavLogo.src="/src/styles/images/Cape Point Chicken House-logos_transparent.png";
+                leftNavLogo.src="/dist/styles/images/Cape Point Chicken House-logos_transparent.png";
         // Center Navigation Bar
         const centerNavBar = navBar.appendChild(document.createElement('div'));
         centerNavBar.classList.add('nav-center');
@@ -198,11 +198,11 @@ const navCreation = (append) => {
             const socialsContainer = rightNavBar.appendChild(document.createElement('div'));
             socialsContainer.classList.add('socials')
                 const instagramLogo = socialsContainer.appendChild(document.createElement('img'));
-                instagramLogo.src = "/src/styles/images/instagram.png";
+                instagramLogo.src = "/dist/styles/images/instagram.png";
                 const facebookLogo = socialsContainer.appendChild(document.createElement('img'));
-                facebookLogo.src = "/src/styles/images/facebook.png";
+                facebookLogo.src = "/dist/styles/images/facebook.png";
                 const twitterLogo = socialsContainer.appendChild(document.createElement('img'));
-                twitterLogo.src = "/src/styles/images/twitter.png";
+                twitterLogo.src = "/dist/styles/images/twitter.png";
             
             // Tab Switching Logic. Removes content using replaceChildren() then repopulates display with corresponding click event listner. 
                 const contentContainer = document.querySelector('.content');
@@ -216,18 +216,18 @@ const navCreation = (append) => {
 
                 const homeHandler = homeTab.addEventListener('click', function () {
                     removeContent();
-                    (0,_src_modules_home_js__WEBPACK_IMPORTED_MODULE_0__.homePageDisplay)();
-                    (0,_src_modules_slide_js__WEBPACK_IMPORTED_MODULE_1__.slideShowAnimation)();        
+                    (0,_home__WEBPACK_IMPORTED_MODULE_0__.homePageDisplay)();
+                    (0,_slide__WEBPACK_IMPORTED_MODULE_1__.slideShowAnimation)();        
                 })
 
                 const menuHandler = menuTab.addEventListener('click', function() {
                     removeContent();
-                    (0,_src_modules_menu_js__WEBPACK_IMPORTED_MODULE_2__.menuPageDisplay)();
+                    (0,_menu_js__WEBPACK_IMPORTED_MODULE_2__.menuPageDisplay)();
                 })
 
                 const contactHandler = contactTab.addEventListener('click', function () {
                     removeContent();
-                    (0,_src_modules_contact_js__WEBPACK_IMPORTED_MODULE_3__.contactPageDisplay)();
+                    (0,_contact_js__WEBPACK_IMPORTED_MODULE_3__.contactPageDisplay)();
                 })
 };    
 
@@ -265,22 +265,22 @@ const homePageDisplay = (() => {
             slide1Container.classList.add('slides');
                 const slide1 = slide1Container.appendChild(document.createElement('img'));
                 slide1.classList.add('slide-image');
-                slide1.src = "/src/styles/images/albert-YYZU0Lo1uXE-unsplash.jpg";
+                slide1.src = "/dist/styles/images/albert-YYZU0Lo1uXE-unsplash.jpg";
             const slide2Container = slideShowContainer.appendChild(document.createElement('div'));
             slide2Container.classList.add('slides');
                 const slide2 = slide2Container.appendChild(document.createElement('img'));
                 slide2.classList.add('slide-image');
-                slide2.src = "/src/styles/images/sameer-waskar-KojQfg8UdCE-unsplash.jpg";  
+                slide2.src = "/dist/styles/images/sameer-waskar-KojQfg8UdCE-unsplash.jpg";  
             const slide3Container = slideShowContainer.appendChild(document.createElement('div'));
             slide3Container.classList.add('slides');
                 const slide3 = slide3Container.appendChild(document.createElement('img'));
                 slide3.classList.add('slide-image');
-                slide3.src = "/src/styles/images/andrew-itaga-_sBMs1TrcIE-unsplash.jpg";
+                slide3.src = "/dist/styles/images/andrew-itaga-_sBMs1TrcIE-unsplash.jpg";
             const slide4Container = slideShowContainer.appendChild(document.createElement('div'));
             slide4Container.classList.add('slides');
                 const slide4 = slide4Container.appendChild(document.createElement('img'));
                 slide4.classList.add('slide-image');
-                slide4.src = "/src/styles/images/peter-pham-DMnYfIAfYSs-unsplash.jpg";
+                slide4.src = "/dist/styles/images/peter-pham-DMnYfIAfYSs-unsplash.jpg";
                 })();
 
 
@@ -330,7 +330,7 @@ const informationCreation =() => {
         infoCenter.classList.add('center-info');
             const infoLogo = infoCenter.appendChild(document.createElement('img'));
             infoLogo.classList.add('info-logo');
-            infoLogo.src = "/src/styles/images/Cape Point Chicken House-logos_transparent.png";
+            infoLogo.src = "/dist/styles/images/Cape Point Chicken House-logos_transparent.png";
 
         //Info Section Right
         const infoRight = informationContainer.appendChild(document.createElement('div'));
@@ -377,7 +377,7 @@ function menuPageDisplay () {
         const menuContainer = addContent.appendChild(document.createElement("div"));
         menuContainer.classList.add('menu-container')
             const menuImage = menuContainer.appendChild(document.createElement('img'));
-            menuImage.src = "/src/styles/images/menu.png";
+            menuImage.src = "/dist/styles/images/menu.png";
             menuImage.setAttribute('id', 'menu-pic')
     })();
     
