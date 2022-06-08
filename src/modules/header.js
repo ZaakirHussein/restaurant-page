@@ -12,7 +12,7 @@ const navCreation = (append) => {
         leftNavBar.classList.add('nav-left');
             const leftNavLogo = leftNavBar.appendChild(document.createElement('img'));
                 leftNavLogo.setAttribute("id","nav-logo");
-                leftNavLogo.src="restaurant-page/images/Cape Point Chicken House-logos_transparent.png";
+                leftNavLogo.src="/restaurant-page/images/Cape Point Chicken House-logos_transparent.png";
         // Center Navigation Bar
         const centerNavBar = navBar.appendChild(document.createElement('div'));
         centerNavBar.classList.add('nav-center');
@@ -36,11 +36,11 @@ const navCreation = (append) => {
             const socialsContainer = rightNavBar.appendChild(document.createElement('div'));
             socialsContainer.classList.add('socials')
                 const instagramLogo = socialsContainer.appendChild(document.createElement('img'));
-                instagramLogo.src = "restaurant-page/images/instagram.png";
+                instagramLogo.src = "/restaurant-page/images/instagram.png";
                 const facebookLogo = socialsContainer.appendChild(document.createElement('img'));
-                facebookLogo.src = "restaurant-page/images/facebook.png";
+                facebookLogo.src = "/restaurant-page/images/facebook.png";
                 const twitterLogo = socialsContainer.appendChild(document.createElement('img'));
-                twitterLogo.src = "restaurant-page/images/twitter.png";
+                twitterLogo.src = "/restaurant-page/images/twitter.png";
             
             // Tab Switching Logic. Removes content using replaceChildren() then repopulates display with corresponding click event listner. 
                 const contentContainer = document.querySelector('.content');

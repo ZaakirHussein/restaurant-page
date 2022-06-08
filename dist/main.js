@@ -27,7 +27,7 @@ function contactPageDisplay () {
 
     const bgImgContainer =  addContent.appendChild(document.createElement('div'));
     bgImgContainer.classList.add('background-container');
-    bgImgContainer.style.backgroundImage = 'url(restaurant-page/images/anchor-lee-kO1G3neRA2o-unsplash.jpg)'
+    bgImgContainer.style.backgroundImage = 'url(/restaurant-page/images/anchor-lee-kO1G3neRA2o-unsplash.jpg)'
     
     const findUsSection = (() => {
         const findUsContainer = bgImgContainer.appendChild(document.createElement("div"));
@@ -174,7 +174,7 @@ const navCreation = (append) => {
         leftNavBar.classList.add('nav-left');
             const leftNavLogo = leftNavBar.appendChild(document.createElement('img'));
                 leftNavLogo.setAttribute("id","nav-logo");
-                leftNavLogo.src="restaurant-page/images/Cape Point Chicken House-logos_transparent.png";
+                leftNavLogo.src="/restaurant-page/images/Cape Point Chicken House-logos_transparent.png";
         // Center Navigation Bar
         const centerNavBar = navBar.appendChild(document.createElement('div'));
         centerNavBar.classList.add('nav-center');
@@ -198,11 +198,11 @@ const navCreation = (append) => {
             const socialsContainer = rightNavBar.appendChild(document.createElement('div'));
             socialsContainer.classList.add('socials')
                 const instagramLogo = socialsContainer.appendChild(document.createElement('img'));
-                instagramLogo.src = "restaurant-page/images/instagram.png";
+                instagramLogo.src = "/restaurant-page/images/instagram.png";
                 const facebookLogo = socialsContainer.appendChild(document.createElement('img'));
-                facebookLogo.src = "restaurant-page/images/facebook.png";
+                facebookLogo.src = "/restaurant-page/images/facebook.png";
                 const twitterLogo = socialsContainer.appendChild(document.createElement('img'));
-                twitterLogo.src = "restaurant-page/images/twitter.png";
+                twitterLogo.src = "/restaurant-page/images/twitter.png";
             
             // Tab Switching Logic. Removes content using replaceChildren() then repopulates display with corresponding click event listner. 
                 const contentContainer = document.querySelector('.content');
@@ -265,22 +265,22 @@ const homePageDisplay = (() => {
             slide1Container.classList.add('slides');
                 const slide1 = slide1Container.appendChild(document.createElement('img'));
                 slide1.classList.add('slide-image');
-                slide1.src = "restaurant-page/images/albert-YYZU0Lo1uXE-unsplash.jpg";
+                slide1.src = "/restaurant-page/images/albert-YYZU0Lo1uXE-unsplash.jpg";
             const slide2Container = slideShowContainer.appendChild(document.createElement('div'));
             slide2Container.classList.add('slides');
                 const slide2 = slide2Container.appendChild(document.createElement('img'));
                 slide2.classList.add('slide-image');
-                slide2.src = "restaurant-page/images/sameer-waskar-KojQfg8UdCE-unsplash.jpg";  
+                slide2.src = "/restaurant-page/images/sameer-waskar-KojQfg8UdCE-unsplash.jpg";  
             const slide3Container = slideShowContainer.appendChild(document.createElement('div'));
             slide3Container.classList.add('slides');
                 const slide3 = slide3Container.appendChild(document.createElement('img'));
                 slide3.classList.add('slide-image');
-                slide3.src = "restaurant-page/images/andrew-itaga-_sBMs1TrcIE-unsplash.jpg";
+                slide3.src = "/restaurant-page/images/andrew-itaga-_sBMs1TrcIE-unsplash.jpg";
             const slide4Container = slideShowContainer.appendChild(document.createElement('div'));
             slide4Container.classList.add('slides');
                 const slide4 = slide4Container.appendChild(document.createElement('img'));
                 slide4.classList.add('slide-image');
-                slide4.src = "restaurant-page/images/peter-pham-DMnYfIAfYSs-unsplash.jpg";
+                slide4.src = "/restaurant-page/images/peter-pham-DMnYfIAfYSs-unsplash.jpg";
                 })();
 
 
@@ -330,7 +330,7 @@ const informationCreation =() => {
         infoCenter.classList.add('center-info');
             const infoLogo = infoCenter.appendChild(document.createElement('img'));
             infoLogo.classList.add('info-logo');
-            infoLogo.src = "restaurant-page/images/Cape Point Chicken House-logos_transparent.png";
+            infoLogo.src = "/restaurant-page/images/Cape Point Chicken House-logos_transparent.png";
 
         //Info Section Right
         const infoRight = informationContainer.appendChild(document.createElement('div'));
@@ -377,7 +377,7 @@ function menuPageDisplay () {
         const menuContainer = addContent.appendChild(document.createElement("div"));
         menuContainer.classList.add('menu-container')
             const menuImage = menuContainer.appendChild(document.createElement('img'));
-            menuImage.src = "restaurant-page/images/menu.png";
+            menuImage.src = "/restaurant-page/images/menu.png";
             menuImage.setAttribute('id', 'menu-pic')
     })();
     
